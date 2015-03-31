@@ -1,23 +1,23 @@
 "use strict";
-angular.module("ContentModule", [])
-    .directive("content", ["StyleFactory", function(StyleFactory){
+angular.module("PromoModule", [])
+    .directive("promo", ["StyleFactory", function(StyleFactory){
         return {
             scope: { id: "@" },
             replace: true,
             restrict: "E",
-            templateUrl: "components/content/content.html",
+            templateUrl: "components/promo/promo.html",
             compile:  function () {
                 return {
                     pre: function () {
-                        StyleFactory.get("content", "components/content/content.css");
+                        StyleFactory.get("promo", "components/promo/promo.css");
                     }
                 }
             },
-            controller: "ContentController"
+            controller: "PromoController"
         }
     }])
-    .controller("ContentController", ["$scope", "ModelFactory", function($scope, ModelFactory) {
-        var api = "/api/content/" + $scope.id;
+    .controller("PromoController", ["$scope", "ModelFactory", function($scope, ModelFactory) {
+        var api = "/api/promo/" + $scope.id;
         ModelFactory.get(api)
             .success(function(data){
                 $scope.model = data;

@@ -1,7 +1,8 @@
 "use strict";
 
 angular.module("MeanStuff", [
-    "ContentModule"
+    "ContentModule",
+    "PromoModule"
 ])
 .factory("StyleFactory", function ($http) {
     var factory = {};
@@ -20,6 +21,7 @@ angular.module("MeanStuff", [
 .factory("ModelFactory", function ($http) {
     var factory = {};
     factory["get"] = function (url) {
+        console.log(url)
         return $http.get(url, { cache: true });
     };
     return factory;

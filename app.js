@@ -4,13 +4,12 @@ var favicon         = require('serve-favicon');
 var logger          = require('morgan');
 var cookieParser    = require('cookie-parser');
 var bodyParser      = require('body-parser');
-var home            = require('./routes/home');
-var contentApi      = require('./routes/api/content');
 var mongoose        = require('mongoose');
+var home            = require('./routes/home');
+var apiConfig       = require('./routes/api/config.json');
 
 var app             = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -25,7 +24,11 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', home);
-app.use('/api/content', contentApi);
+for(var i = 0; i < apiConfig.length; i++) {
+    console.log("Register API:", apiConfig[i].url);
+    var api = require('./routes/api/' + apiConfig[i].id);
+    app.use(apiConfig[i].url, api);
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

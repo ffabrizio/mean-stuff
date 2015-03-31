@@ -1,0 +1,10 @@
+[
+  {
+    "id" : "content",
+    "url" : "/api/content"
+  },
+  {
+    "id" : "promo",
+    "url" : "/api/promo"
+  }
+]
