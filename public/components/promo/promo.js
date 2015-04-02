@@ -5,11 +5,11 @@ angular.module("PromoModule", [])
             scope: { id: "@" },
             replace: true,
             restrict: "E",
-            templateUrl: "components/promo/promo.html",
+            templateUrl: "/components/promo/promo.html",
             compile:  function () {
                 return {
                     pre: function () {
-                        StyleFactory.get("promo", "components/promo/promo.css");
+                        StyleFactory.get("promo", "/components/promo/promo.css");
                     }
                 }
             },

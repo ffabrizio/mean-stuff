@@ -5,11 +5,11 @@ angular.module("ContentModule", [])
             scope: { id: "@" },
             replace: true,
             restrict: "E",
-            templateUrl: "components/content/content.html",
+            templateUrl: "/components/content/content.html",
             compile:  function () {
                 return {
                     pre: function () {
-                        StyleFactory.get("content", "components/content/content.css");
+                        StyleFactory.get("content", "/components/content/content.css");
                     }
                 }
             },

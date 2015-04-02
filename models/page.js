@@ -1,10 +1,10 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+var mongoose            = require('mongoose');
+var extend              = require('mongoose-schema-extend');
+var Content             = require('./content');
 
-var ModuleSchema = new Schema({ type: String, id: String });
-var PageSchema   = new Schema({
-    name: String,
-    description: String,
+var ModuleSchema = mongoose.Schema({ type: String, id: String });
+var PageSchema   = Content.schema.extend({
+    url: String,
     modules: [ModuleSchema]
 });
 

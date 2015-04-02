@@ -34,7 +34,6 @@ router.route('/:id')
     })
     .put(function(req, res) {
 
-        // use our bear model to find the bear we want
         Content.findById(req.params.id, function(err, content) {
 
             if (err)
@@ -42,7 +41,6 @@ router.route('/:id')
 
             content.name = req.body.name;
             content.description = req.body.description
-            content.__v ++;
 
             content.save(function(err) {
                 if (err)
