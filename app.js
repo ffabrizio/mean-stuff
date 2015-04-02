@@ -24,36 +24,40 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 for(var i = 0; i < apiConfig.length; i++) {
-    console.log("Register API:", apiConfig[i].url);
+    console.log("Register API routes:", apiConfig[i].url);
     var api = require('./routes/api/' + apiConfig[i].id);
     app.use(apiConfig[i].url, api);
 }
 
 app.use('/', home);
+console.log("Register PAGE routes:", '/*');
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function(req, res) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    res.render('error', {
+        message: err.message,
+        error: err
+    });
 });
 
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res) {
+        res.status(err.status || 500);
+        res.render('error', {
+        message: err.message,
+        error: err
+        });
     });
-  });
 }
 
 app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
-
 module.exports = app;
+console.log("App listening on http://localhost:" + (process.env.PORT || '3000'));
