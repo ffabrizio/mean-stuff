@@ -9,10 +9,11 @@ angular.module("MeanStuff", [
     factory["get"] = function (name, url) {
         var cssId = "css-" + name;
         $http.get(url, { cache: true })
-            .success(function () {
+            .success(function (data) {
                 if (document.getElementById(cssId) === null) {
                     angular.element(document.querySelector('head'))
-                        .append("<link id=\"" + cssId + "\" href=\"" + url + "\" rel=\"stylesheet\">");
+                        .append("<style id=\"" + cssId + "\" type=\"text/css\">" + data + "</style>");
+                        //.append("<link id=\"" + cssId + "\" href=\"" + url + "\" rel=\"stylesheet\">");
                 }
             });
     };
@@ -21,7 +22,6 @@ angular.module("MeanStuff", [
 .factory("ModelFactory", function ($http) {
     var factory = {};
     factory["get"] = function (url) {
-        console.log(url)
         return $http.get(url, { cache: true });
     };
     return factory;
